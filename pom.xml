@@ -43,6 +43,7 @@
         <module>hibernate-ogm-integrationtest</module>
         <module>hibernate-ogm-modules</module>
         <module>hibernate-ogm-mongodb</module>
+        <module>hibernate-ogm-couchbase</module>
     </modules>
 
     <prerequisites>

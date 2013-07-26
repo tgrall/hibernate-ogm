@@ -18,24 +18,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-package org.hibernate.ogm.test.mongodb.associations;
-
-import org.hibernate.cfg.Configuration;
-import org.hibernate.ogm.datastore.mongodb.AssociationStorage;
-import org.hibernate.ogm.datastore.mongodb.impl.configuration.Environment;
-import org.hibernate.ogm.test.associations.collection.unidirectional.CollectionUnidirectionalTest;
+package org.hibernate.ogm.datastore.couchbase.impl;
 
 /**
- * @author Emmanuel Bernard <emmanuel@hibernate.org>
+ * Defines the various association storage strategies
+ *
+ * @author Tugdual Grall <tugdual@grallandco.com></tugdual@grallandco.com>
  */
-public class CollectionUnidirectionalCollectionTest extends CollectionUnidirectionalTest {
-	@Override
-	protected void configure(Configuration cfg) {
-		super.configure( cfg );
-		cfg.setProperty(
-//				Environment.MONGODB_ASSOCIATIONS_STORE,
-				Environment.MONGODB_DEFAULT_ASSOCIATION_STORE,
-				AssociationStorage.COLLECTION.name()
-		);
-	}
+public enum AssociationStorage {
+    /**
+     * Store association information from within the entity
+     */
+    IN_ENTITY
 }

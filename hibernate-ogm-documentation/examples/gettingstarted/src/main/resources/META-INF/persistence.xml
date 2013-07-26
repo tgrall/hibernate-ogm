@@ -4,18 +4,51 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     version="2.0">
 
-    <persistence-unit name="ogm-jpa-tutorial" transaction-type="JTA">
+    <!--<persistence-unit name="ogm-jpa-tutorial-cb" transaction-type="JTA">-->
+        <!--&lt;!&ndash; Use Hibernate OGM provider: configuration will be transparent &ndash;&gt;-->
+        <!--<provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>-->
+        <!--<properties>-->
+            <!--&lt;!&ndash; property optional if you plan and use Infinispan, otherwise adjust to your favorite-->
+                <!--NoSQL Datastore provider.-->
+            <!--<property name="hibernate.ogm.datastore.provider"-->
+                      <!--value="org.hibernate.ogm.datastore.infinispan.impl.InfinispanDatastoreProvider"/>-->
+            <!--&ndash;&gt;-->
+            <!--&lt;!&ndash; defines which JTA Transaction we plan to use &ndash;&gt;-->
+            <!--<property name="hibernate.transaction.jta.platform"-->
+                      <!--value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform"/>-->
+        <!--</properties>-->
+	<!--</persistence-unit>-->
+
+
+    <persistence-unit name="ogm-jpa-tutorial-cb" transaction-type="JTA">
         <!-- Use Hibernate OGM provider: configuration will be transparent -->
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
         <properties>
-            <!-- property optional if you plan and use Infinispan, otherwise adjust to your favorite
-                NoSQL Datastore provider.
-            <property name="hibernate.ogm.datastore.provider"
-                      value="org.hibernate.ogm.datastore.infinispan.impl.InfinispanDatastoreProvider"/>
-            -->
-            <!-- defines which JTA Transaction we plan to use -->
-            <property name="hibernate.transaction.jta.platform"
-                      value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform"/>
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform" />
+            <property name="jboss.as.jpa.providerModule" value="org.hibernate:ogm"/>
+            <property name="hibernate.ogm.datastore.provider" value="org.hibernate.ogm.datastore.couchbase.impl.CouchbaseDatastoreProvider"/>
+            <property name="hibernate.ogm.couchbase.urls" value="http://127.0.0.1:8091/pools" />
+            <property name="hibernate.ogm.couchbase.bucket" value="ogm" />
+            <property name="hibernate.ogm.couchbase.password" value="" />
+            <property name="hibernate.ogm.couchbase.storageType" value="SIMPLE" />
+            <property name="hibernate.ogm.couchbase.administrator" value="Administrator" />
+            <property name="hibernate.ogm.couchbase.admin.password" value="welcome1" />
+            <property name="hibernate.ogm.couchbase.bucket.password" value="" />
+            <property name="hibernate.ogm.couchbase.createBucket" value="true" />
         </properties>
-	</persistence-unit>
+    </persistence-unit>
+
+    <persistence-unit name="ogm-jpa-tutorial-mongo" transaction-type="JTA">
+        <!-- Use Hibernate OGM provider: configuration will be transparent -->
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform" />
+            <property name="jboss.as.jpa.providerModule" value="org.hibernate:ogm"/>
+            <property name="hibernate.ogm.datastore.provider" value="org.hibernate.ogm.datastore.mongodb.impl.MongoDBDatastoreProvider"/>
+            <property name="hibernate.ogm.mongodb.database" value="TUGDB" />
+            <property name="hibernate.ogm.mongodb.connection_timeout" value="200" />
+            <property name="hibernate.ogm.mongodb.associations.store" value="IN_ENTITY" />
+        </properties>
+    </persistence-unit>
+
 </persistence>
