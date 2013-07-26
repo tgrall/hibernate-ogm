@@ -2,9 +2,10 @@ package org.hibernate.ogm.examples.gettingstarted.domain;
 
 
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,8 +20,6 @@ public class Cloud {
 	private Set<SnowFlake> producedSnowFlakes = new HashSet<SnowFlake>();
 
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	public String getId() {
 		return id;
 	}
